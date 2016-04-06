@@ -2,7 +2,7 @@
 #include<stdlib.h>
 #include<string.h>
 #define CONTENT_LENGTH getenv("CONTENT_LENGTH")
-
+FILE *file;
 void profile(char *tok){
    char attribute[strlen(tok)];
    int i;
@@ -20,8 +20,9 @@ void profile(char *tok){
          attribute[j] = tok[i];
          j++;
       }
-      attribute[j] = '\0';
+      attribute[j] = '\n';
       printf("Username: %s<br />", attribute);
+      fputs(attribute, file);
       //checkUnique(attribute);
    }
    else if(strcmp(attribute, "pWord") == 0){//password
@@ -29,7 +30,8 @@ void profile(char *tok){
          attribute[j] = tok[i];
          j++;
       }
-      attribute[j] = '\0';
+      attribute[j] = '\n';
+      fputs(attribute, file);
       printf("Password: %s<br />", attribute);
    } 
    else if(strcmp(attribute, "fName") == 0){//full name
@@ -38,7 +40,8 @@ void profile(char *tok){
          else attribute[j] = tok[i];
          j++;
       }
-      attribute[j] = '\0';
+      attribute[j] = '\n';
+      fputs(attribute, file);
       printf("Name: %s<br />", attribute);
    }
    else if(strcmp(attribute, "uJob") == 0){//job description
@@ -47,13 +50,15 @@ void profile(char *tok){
          else attribute[j] = tok[i];
          j++;
       }
-      attribute[j] = '\0';
+      attribute[j] = '\n';
+      fputs(attribute, file);
       printf("Description: %s<br />", attribute);
    }
 }
 
 int main(void){
    int n;
+   file = fopen("users.txt", "at");//so we can append to file
    char *token = NULL;
    char *inputString = NULL;
    printf("Content-Type:text/html\n\n");//to print to browser
@@ -76,5 +81,6 @@ int main(void){
    }
    printf("</body>");
    printf("</html>");
+   fclose(file);
    return 0;
 }
