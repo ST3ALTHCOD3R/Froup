@@ -3,9 +3,36 @@
 #include<string.h>
 #define CONTENT_LENGTH getenv("CONTENT_LENGTH")
 FILE *file;
-void profile(char *tok){
+int unique;
+int userInterval = 0;
+int checkUnique(char *name){//check if username is unique
+   int length = strlen(name) +1;
+   char line[300];
+   fgets(line, 299, file);
+   while(!feof(file)){
+      //printf("line (%s)<br />",line);
+      int i =0;
+      while(line[i] != '\n'){
+         i++;
+      }
+      line[i] = '\0';
+      if(userInterval%4 == 0){//so it only compares when it needs to
+         printf("line %d | ",userInterval);
+         printf("comparison of Username (%s): %d with (%s)<br />",name, strcmp(name, line), line);
+         if(strcmp(name, line) == 0){//a same username is found
+            return 0;
+         }
+      }
+      userInterval++;
+      fgets(line, 299, file);
+   }
+   return 1;//it is unique
+}
+
+int profile(char *tok){
    char attribute[strlen(tok)];
    int i;
+   if(tok[0] == '\n')printf("it is null");
    for (i=0; i < strlen(tok); i++){ 
       if(tok[i] != '='){
          attribute[i] = tok[i];
@@ -20,45 +47,55 @@ void profile(char *tok){
          attribute[j] = tok[i];
          j++;
       }
-      attribute[j] = '\n';
-      printf("Username: %s<br />", attribute);
-      fputs(attribute, file);
-      //checkUnique(attribute);
+      attribute[j] = '\0';
+     //printf("%s unique? %d<br />",attribute, checkUnique(attribute));
+      if(checkUnique(attribute)){ 
+           unique = 1;
+           fputs(attribute, file);
+           fputs("\n", file);
+        }
+      else unique = 0;
+      return 0;
    }
-   else if(strcmp(attribute, "pWord") == 0){//password
-      for(; tok[i] != '\0'; i++){
-         attribute[j] = tok[i];
-         j++;
+   if(unique){
+      if(strcmp(attribute, "pWord") == 0){//password
+         for(; tok[i] != '\0'; i++){
+            attribute[j] = tok[i];
+            j++;
+         }
+         attribute[j] = '\0';
+         fputs(attribute, file);
+         fputs("\n", file);
+         return 0;
+      } 
+      else if(strcmp(attribute, "fName") == 0){//full name
+         for(; tok[i] != '\0'; i++){
+            if(tok[i] == '+') attribute[j] = ' ';
+            else attribute[j] = tok[i];
+            j++;
+         }
+         attribute[j] = '\0';
+         fputs(attribute, file);
+         fputs("\n", file);
+         return 0;
       }
-      attribute[j] = '\n';
-      fputs(attribute, file);
-      printf("Password: %s<br />", attribute);
-   } 
-   else if(strcmp(attribute, "fName") == 0){//full name
-      for(; tok[i] != '\0'; i++){
-         if(tok[i] == '+') attribute[j] = ' ';
-         else attribute[j] = tok[i];
-         j++;
+      else if(strcmp(attribute, "uJob") == 0){//job description
+         for(; tok[i] != '\0'; i++){
+            if(tok[i] == '+') attribute[j] = ' ';
+            else attribute[j] = tok[i];
+            j++;
+         }
+         attribute[j] = '\0';
+         fputs(attribute, file);
+         fputs("\n", file);
+         return 0;
       }
-      attribute[j] = '\n';
-      fputs(attribute, file);
-      printf("Name: %s<br />", attribute);
-   }
-   else if(strcmp(attribute, "uJob") == 0){//job description
-      for(; tok[i] != '\0'; i++){
-         if(tok[i] == '+') attribute[j] = ' ';
-         else attribute[j] = tok[i];
-         j++;
-      }
-      attribute[j] = '\n';
-      fputs(attribute, file);
-      printf("Description: %s<br />", attribute);
    }
 }
 
 int main(void){
    int n;
-   file = fopen("users.txt", "at");//so we can append to file
+   file = fopen("users.txt", "a+");//so we can read and append to file
    char *token = NULL;
    char *inputString = NULL;
    printf("Content-Type:text/html\n\n");//to print to browser
