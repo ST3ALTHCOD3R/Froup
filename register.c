@@ -17,8 +17,8 @@ int checkUnique(char *name){//check if username is unique
       }
       line[i] = '\0';
       if(userInterval%4 == 0){//so it only compares when it needs to
-         printf("line %d | ",userInterval);
-         printf("comparison of Username (%s): %d with (%s)<br />",name, strcmp(name, line), line);
+         //printf("line %d | ",userInterval);
+         //printf("comparison of Username (%s): %d with (%s)<br />",name, strcmp(name, line), line);
          if(strcmp(name, line) == 0){//a same username is found
             return 0;
          }
@@ -107,7 +107,7 @@ int main(void){
       if((inputString = malloc(sizeof(char) * (n+1))) != NULL){
          if((fread(inputString, sizeof(char), n, stdin)) == n){
             strcpy(manString, inputString);
-            printf("str length: %d and string is: %s.<br />",n, manString);
+            //printf("str length: %d and string is: %s.<br />",n, manString);
             token = strtok(manString, "&");
             while(token != NULL){
                profile(token);
@@ -116,6 +116,8 @@ int main(void){
          }
       }
    }
+   if(unique)printf("Account Created Succesfully");
+   else printf("Error: Username has already been taken");
    printf("</body>");
    printf("</html>");
    fclose(file);
