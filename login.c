@@ -17,7 +17,6 @@ int checkCorrect(char *input){
    attribute[i] = '\0';
    i++;
    int j = 0;
-   printf("Attribute: %s<br />", attribute);
    if(strcmp(attribute, "uName") == 0){//check username
       for(; input[i] != '\0'; i++){
          attribute[j] = input[i];
@@ -48,15 +47,17 @@ int checkCorrect(char *input){
       }
       attribute[j] = '\0';//to get the value of uName
       fgets(line, 299, file);//to get the password for that specific user
-      printf("password on file: %s and password to check: %s<br />", line, attribute);
       j=0;
       while(line[j] != '\n'){
          j++;
       }
       line[j] = '\0';
+      //printf("password on file: %s and password to check: %s<br />", line, attribute);
+      //printf("comparison:%d<br />", strcmp(attribute, line));
       if(strcmp(attribute, line) == 0){
          return 1;//password correct
       }
+      else return 0;//password incorrect
    }
 }
 
@@ -79,7 +80,7 @@ int main(){
                if(checkCorrect(token)){
                   token = strtok(NULL, "&");
                }
-               else{ printf("username does not exist"); return 1;}//username does not exist
+               else{ printf("Incorrect Username or Password"); return 1;}//username does not exist
             }
             printf("Password is correct");
             return 0;//password is right to the username
