@@ -4,9 +4,8 @@
 #define CONTENT_LENGTH getenv("CONTENT_LENGTH")
 FILE *file;
 int unique;
-int userInterval = 0;
 int checkUnique(char *name){//check if username is unique
-   int length = strlen(name) +1;
+   int userInterval = 0;
    char line[300];
    fgets(line, 299, file);
    while(!feof(file)){
@@ -116,8 +115,23 @@ int main(void){
          }
       }
    }
-   if(unique)printf("Account Created Succesfully");
-   else printf("Error: Username has already been taken");
+   if(unique){
+      printf("Congratulations! Your account has been been made. Now login and interact with all your pals<br />");
+      printf("<form action=\"login.html\">");
+      printf("<input type=\"submit\" value=\"Login\">");
+      printf("</form>");
+   }
+   else{
+      printf("Error: Username has already been taken<br />");
+      printf("Retry making an account?");
+      printf("<form action=\"login.html\">");
+      printf("<input type=\"submit\" value=\"Login\">");
+      printf("</form>");
+      printf("or going back to the home screen?");
+      printf("<form action=\"index.html\">");
+      printf("<input type=\"submit\" value=\"Home\">");
+      printf("</form>");
+   }
    printf("</body>");
    printf("</html>");
    fclose(file);

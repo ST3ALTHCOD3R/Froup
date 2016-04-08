@@ -74,13 +74,24 @@ int main(){
       if((inputString = malloc(sizeof(char) * (n+1))) != NULL){
          if((fread(inputString, sizeof(char), n, stdin)) == n){
             strcpy(manString, inputString);
-            printf("str length: %d and string is: %s.<br />",n, manString);
+            //printf("str length: %d and string is: %s.<br />",n, manString);
             token = strtok(manString, "&");
             while(token != NULL){
                if(checkCorrect(token)){
                   token = strtok(NULL, "&");
                }
-               else{ printf("Incorrect Username or Password"); return 1;}//username does not exist
+               else{
+                  printf("Error: Incorrect Username or Password<br />"); 
+                  printf("Retry logging in?");
+                  printf("<form action=\"login.html\">");
+                  printf("<input type=\"submit\" value=\"Login\">");
+                  printf("</form>");
+                  printf("or going back to the home screen?");
+                  printf("<form action=\"index.html\">");
+                  printf("<input type=\"submit\" value=\"Home\">");
+                  printf("</form>");
+                  return 1;
+               }//username does not exist
             }
             printf("Password is correct");
             return 0;//password is right to the username

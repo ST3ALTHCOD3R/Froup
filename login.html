@@ -2,8 +2,8 @@
   <head>
     <title>Sign up|Login</title>
   </head>
-  <body>
-    <h1>Login or create a new account</h1>
+  <body bgcolor=#ffa64d>
+    <center><h1>Login or create a new account</h1></center>
     <b><u>SIGN UP</u></b><br />
     <form action="Register.cgi" method="post">
       Username: <input type="text" name="uName" maxlength="15"><br />
@@ -11,6 +11,12 @@
       Full Name: <input type="text" name="fName"><br />
       Brief job description: <input type="text" name="uJob"><br />
       <input type="submit" value="Register">
+    </form>
+    <b><u>LOGIN</u></b><br />
+    <form action="Login.cgi" method="post">
+      Username: <input type="text" name="uName" maxlength="15"><br />
+      Password: <input type="password" name="pWord" maxlength="15"><br />
+      <input type="submit" value="Login">
     </form>
   </body>
 </html>
