@@ -47,14 +47,15 @@ int profile(char *tok){
          j++;
       }
       attribute[j] = '\0';
-     //printf("%s unique? %d<br />",attribute, checkUnique(attribute));
+      if(attribute[0] == '\0') return 0;//no username
+      //printf("%s unique? %d<br />",attribute, checkUnique(attribute));
       if(checkUnique(attribute)){ 
            unique = 1;
            fputs(attribute, file);
            fputs("\n", file);
         }
       else unique = 0;
-      return 0;
+      return 1;
    }
    if(unique){
       if(strcmp(attribute, "pWord") == 0){//password
@@ -63,9 +64,10 @@ int profile(char *tok){
             j++;
          }
          attribute[j] = '\0';
+         if(attribute[0] == '\0') return 0;//no password
          fputs(attribute, file);
          fputs("\n", file);
-         return 0;
+         return 1;
       } 
       else if(strcmp(attribute, "fName") == 0){//full name
          for(; tok[i] != '\0'; i++){
@@ -76,7 +78,7 @@ int profile(char *tok){
          attribute[j] = '\0';
          fputs(attribute, file);
          fputs("\n", file);
-         return 0;
+         return 1;
       }
       else if(strcmp(attribute, "uJob") == 0){//job description
          for(; tok[i] != '\0'; i++){
@@ -87,7 +89,7 @@ int profile(char *tok){
          attribute[j] = '\0';
          fputs(attribute, file);
          fputs("\n", file);
-         return 0;
+         return 1;
       }
    }
 }
@@ -109,8 +111,24 @@ int main(void){
             //printf("str length: %d and string is: %s.<br />",n, manString);
             token = strtok(manString, "&");
             while(token != NULL){
-               profile(token);
-               token = strtok(NULL, "&");
+               if(profile(token)){
+                  token = strtok(NULL, "&");
+               }
+               else{
+                  printf("Oops! Make sure to include both a Username AND Password<br />");
+                  printf("Retry making an account?");
+                  printf("<form action=\"login.html\">");
+                  printf("<input type=\"submit\" value=\"Login\">");
+                  printf("</form>");
+                  printf("or going back to the home screen?");
+                  printf("<form action=\"index.html\">");
+                  printf("<input type=\"submit\" value=\"Home\">");
+                  printf("</form>");
+                  printf("</body>");
+                  printf("</html>");
+                  fclose(file);
+                  return 0;
+               }
             }
          }
       }
