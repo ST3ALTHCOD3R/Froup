@@ -1,7 +1,4 @@
 #!/usr/bin/env python
-import sys
-import os
-import stat
 import cgi
 
 def readFile():
@@ -11,16 +8,19 @@ def readFile():
 	try:
 		input = open("users.txt","r")
 		read = input.readlines()
-		inputTuple = []
 		i=0
+		print "<form action=\"newfriends.py\" method=\"get\">"
+		print "USERNAME | FULL NAME<br />"
 		for line in read:
 			singleLine = line.rstrip()
 			if(i%4 == 0):
-				print "Username: ",singleLine,"<br />"
+				user = singleLine
+				print user
 			if(i%4 == 2):
-				print "Full Name: ",singleLine,"<br />"
+				print " | ",singleLine,"<input type=\"checkbox\" name=\"",user,"\">","<br />"
 			i+=1
-			inputTuple.append(singleLine)
+		print "<input type=\"submit\" value=\"Submit\">"
+                print "</form>"
 	except IOError, (errno, strerror):
 		print "I/O error(%s): %s"%(errno, strerror)
 	except:
