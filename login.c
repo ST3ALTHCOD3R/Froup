@@ -94,6 +94,9 @@ int main(){
                }//username does not exist
             }
             printf("Password is correct");
+            printf("<form action=\"makefriends.py\">");
+            printf("<input type=\"submit\" value=\"Make Friends\">");
+            printf("</form>");
             return 0;//password is right to the username
          }
       }
