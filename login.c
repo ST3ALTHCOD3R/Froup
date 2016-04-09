@@ -4,6 +4,7 @@
 #define CONTENT_LENGTH getenv("CONTENT_LENGTH")
 FILE *file;
 char line[300];//so it remembers the username when coming bak to check if password is correct
+char user[20];
 int checkCorrect(char *input){
    char attribute[strlen(input)];
    int i, userInterval = 0;
@@ -32,6 +33,7 @@ int checkCorrect(char *input){
             }
             line[j] = '\0';
             if(strcmp(attribute, line) == 0){
+               strcpy(user, attribute);//so the user can be passed in a hidden field later
                return 1;//username found 
             }
          }
@@ -94,8 +96,9 @@ int main(){
                }//username does not exist
             }
             printf("Password is correct");
-            printf("<form action=\"makefriends.py\">");
+            printf("<form action=\"makefriends.py\" method=\"post\">");
             printf("<input type=\"submit\" value=\"Make Friends\">");
+            printf("<input type=\"hidden\" name=\"currentUser\" value=\"%s\">", user);//pas on current user
             printf("</form>");
             return 0;//password is right to the username
          }

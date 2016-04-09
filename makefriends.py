@@ -2,6 +2,9 @@
 import cgi
 
 def readFile():
+	form = cgi.FieldStorage()
+	if form.has_key('currentUser'):
+		currentUser = form["currentUser"].value
 	print "Content-Type: text/html\n\n"
 	print "<html><head><title>Make Friends</title></head>"
 	print "<body>"
@@ -9,16 +12,23 @@ def readFile():
 		input = open("users.txt","r")
 		read = input.readlines()
 		i=0
+		skip = 0
 		print "<form action=\"newfriends.py\" method=\"get\">"
 		print "USERNAME | FULL NAME<br />"
 		for line in read:
 			singleLine = line.rstrip()
 			if(i%4 == 0):
 				user = singleLine
-				print user
+				if user == currentUser: #they cannot be friends with themselves
+					skip = 1
+				else:
+					print user
+					skip = 0
 			if(i%4 == 2):
-				print " | ",singleLine,"<input type=\"checkbox\" name=\"",user,"\">","<br />"
+				if skip == 0:
+					print " | ",singleLine,"<input type=\"checkbox\" name=\"",user,"\">","<br />"
 			i+=1
+		print "<input type=\"hidden\" name=\"currentUser\" value=\"",currentUser,"\">"
 		print "<input type=\"submit\" value=\"Submit\">"
                 print "</form>"
 	except IOError, (errno, strerror):

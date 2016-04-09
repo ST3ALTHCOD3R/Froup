@@ -11,7 +11,6 @@ def writeBack(toWrite): #dictionary that needs to be copied to file
 	output.close()
 
 def addFriends():
-	currentUser = "Mark"
 	changesMade = 0
 	input = open("friends.txt","r")
         read = input.readlines()
@@ -27,9 +26,16 @@ def addFriends():
 	input.close()
 	form = cgi.FieldStorage() #put recieved data into dictionary
 	friendsChosen = []#stores friends chosen in a list
+	print form,"<br />"
+	if form.has_key('currentUser'):
+                currentUser = form["currentUser"].value.replace(" ","")
+		#del form['currentUser']
+	print form,"<br />"
+	print currentUser,"<br />"
 	for tok in form:
 		tok = tok.replace(" ","")
 		friendsChosen.append(tok)
+		print friendsChosen,"<br />"
 	#print "START",dict,"<br />"
 	if currentUser in dict: #if user already has friends in database
 		for friend in friendsChosen:
