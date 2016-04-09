@@ -115,7 +115,7 @@ int main(void){
                   token = strtok(NULL, "&");
                }
                else{
-                  printf("Oops! Make sure to include both a Username AND Password<br />");
+                  printf("<b>Oops! Make sure to include both a Username AND Password</b><br /><br />");
                   printf("Retry making an account?");
                   printf("<form action=\"login.html\">");
                   printf("<input type=\"submit\" value=\"Login\">");
@@ -134,13 +134,13 @@ int main(void){
       }
    }
    if(unique){
-      printf("Congratulations! Your account has been been made. Now login and interact with all your pals<br />");
+      printf("<b>Congratulations! Your account has been been made. Now login and connect with your friends!</b><br /><br />");
       printf("<form action=\"login.html\">");
       printf("<input type=\"submit\" value=\"Login\">");
       printf("</form>");
    }
    else{
-      printf("Error: Username has already been taken<br />");
+      printf("Error: Username has already been taken<br /><br />");
       printf("Retry making an account?");
       printf("<form action=\"login.html\">");
       printf("<input type=\"submit\" value=\"Login\">");

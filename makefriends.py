@@ -26,6 +26,10 @@ def readFile():
 	except:
 		print "Unexpected error"
 	input.close()
+	print "Or go back to the dashboard<br />"
+	print "<form action=\"login.html\">"
+	print "<input type=\"submit\" value=\"Dashboard\">"
+	print "</form>"
 	print "</body>"
 	print "</html>"
 readFile()

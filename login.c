@@ -81,7 +81,7 @@ int main(){
                   token = strtok(NULL, "&");
                }
                else{
-                  printf("Error: Incorrect Username or Password<br />"); 
+                  printf("<b>Error: Incorrect Username or Password</b><br /><br />"); 
                   printf("Retry logging in?");
                   printf("<form action=\"login.html\">");
                   printf("<input type=\"submit\" value=\"Login\">");
