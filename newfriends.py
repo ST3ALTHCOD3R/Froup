@@ -11,7 +11,7 @@ def writeBack(toWrite): #dictionary that needs to be copied to file
 	output.close()
 
 def addFriends():
-	currentUser = "imalonelysoul12"
+	currentUser = "Mark"
 	changesMade = 0
 	input = open("friends.txt","r")
         read = input.readlines()
@@ -30,7 +30,7 @@ def addFriends():
 	for tok in form:
 		tok = tok.replace(" ","")
 		friendsChosen.append(tok)
-	print "START",dict,"<br />"
+	#print "START",dict,"<br />"
 	if currentUser in dict: #if user already has friends in database
 		for friend in friendsChosen:
 			if friend not in dict[currentUser]: #if friend is unique
@@ -42,8 +42,12 @@ def addFriends():
 		for friend in friendsChosen: #user is a friend to the ones he/she chose
 			dict[friend].append(currentUser)
 		changesMade = 1
-	print "FINISH",dict
-	print "</body></html>"
+	#print "FINISH",dict
 	if changesMade == 1: #to now waste rewriting the same thing
 		writeBack(dict)#write to file updated friends
+	print "Success! Changes(if any) have been made to your account!<br />"
+	print "<form action=\"login.html\">"
+	print "Go back to dashboard<input type=\"submit\" value=\"Dashboard\">"
+	print "</form>"
+	print "</body></html>"
 addFriends()	
