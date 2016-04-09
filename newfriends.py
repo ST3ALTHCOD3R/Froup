@@ -29,13 +29,13 @@ def addFriends():
 	print form,"<br />"
 	if form.has_key('currentUser'):
                 currentUser = form["currentUser"].value.replace(" ","")
-		#del form['currentUser']
 	print form,"<br />"
 	print currentUser,"<br />"
 	for tok in form:
-		tok = tok.replace(" ","")
-		friendsChosen.append(tok)
-		print friendsChosen,"<br />"
+		if tok != "currentUser":
+			tok = tok.replace(" ","")
+			friendsChosen.append(tok)
+			print friendsChosen,"<br />"
 	#print "START",dict,"<br />"
 	if currentUser in dict: #if user already has friends in database
 		for friend in friendsChosen:
