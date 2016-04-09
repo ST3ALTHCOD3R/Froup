@@ -2,7 +2,7 @@
 import cgi
 
 def addFriends():
-	currentUser = "Michael"
+	currentUser = "imalonelysoul12"
 	input = open("friends.txt","r")
         read = input.readlines()
         dict = {}#to store users and their friends
@@ -25,7 +25,7 @@ def addFriends():
 		for user in friendsChosen:
 			if user not in dict[currentUser]: #if friend is unique
 				dict[currentUser].append(user)
-				#dict[user].append(currentUser) #friendship goes both ways
+				dict[user].append(currentUser) #friendship goes both ways
 	else: #user does not have any friends yet
 		dict[currentUser] = friendsChosen #add all chosen users to be friends
 		for friend in friendsChosen: #user is a friend to the ones he/she chose
