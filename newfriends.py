@@ -35,12 +35,12 @@ def addFriends():
 		for friend in friendsChosen:
 			if friend not in dict[currentUser]: #if friend is unique
 				dict[currentUser].append(friend)
-				dict[friend].append(currentUser) #friendship goes both ways
+				#dict[friend].append(currentUser) #friendship goes both ways
 				changesMade = 1
 	else: #user does not have any friends yet
 		dict[currentUser] = friendsChosen #add all chosen users to be friends
-		for friend in friendsChosen: #user is a friend to the ones he/she chose
-			dict[friend].append(currentUser)
+		#for friend in friendsChosen: #user is a friend to the ones he/she chose
+			#dict[friend].append(currentUser)
 		changesMade = 1
 	#print "FINISH",dict
 	if changesMade == 1: #to now waste rewriting the same thing

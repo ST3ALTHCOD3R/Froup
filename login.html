@@ -1,22 +1,30 @@
 <html>
   <head>
     <title>Sign up|Login</title>
+    <link rel="stylesheet" href="login.css" type="text/css">
   </head>
-  <body bgcolor=#ffa64d>
-    <center><h1>Login or create a new account</h1></center>
-    <b><u>SIGN UP</u></b><br />
-    <form action="Register.cgi" method="post">
-      Username: <input type="text" name="uName" maxlength="15"><br />
-      Password: <input type="password" name="pWord" maxlength="15"><br />
-      Full Name: <input type="text" name="fName"><br />
-      Brief job description: <input type="text" name="uJob"><br />
-      <input type="submit" value="Register">
-    </form>
-    <b><u>LOGIN</u></b><br />
-    <form action="Login.cgi" method="post">
-      Username: <input type="text" name="uName" maxlength="15"><br />
-      Password: <input type="password" name="pWord" maxlength="15"><br />
-      <input type="submit" value="Login">
-    </form>
+  <body>
+    <div id="square">
+      <center><h1>Froup</h1></center>
+    </div>
+    <center><h2><u>Login or create a new account</h2></u></center>
+    <div id="signup">
+      <b><u>SIGN UP</u></b><br /><br />
+      <form action="Register.cgi" method="post">
+        Username: <input type="text" name="uName" maxlength="15"><br />
+        Password: <input type="password" name="pWord" maxlength="15"><br />
+        Full Name: <input type="text" name="fName"><br />
+        Brief job description: <input type="text" name="uJob"><br />
+        <input type="submit" value="Register">
+      </form>
+    </div>
+    <div id="login">
+      <b><u>LOGIN</u></b><br /><br />
+      <form action="Login.cgi" method="post">
+        Username: <input type="text" name="uName" maxlength="15"><br />
+        Password: <input type="password" name="pWord" maxlength="15"><br />
+        <input type="submit" value="Login">
+      </form>
+    </div>
   </body>
 </html>
