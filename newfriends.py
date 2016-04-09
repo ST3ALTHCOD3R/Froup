@@ -26,16 +26,12 @@ def addFriends():
 	input.close()
 	form = cgi.FieldStorage() #put recieved data into dictionary
 	friendsChosen = []#stores friends chosen in a list
-	print form,"<br />"
 	if form.has_key('currentUser'):
                 currentUser = form["currentUser"].value.replace(" ","")
-	print form,"<br />"
-	print currentUser,"<br />"
 	for tok in form:
 		if tok != "currentUser":
 			tok = tok.replace(" ","")
 			friendsChosen.append(tok)
-			print friendsChosen,"<br />"
 	#print "START",dict,"<br />"
 	if currentUser in dict: #if user already has friends in database
 		for friend in friendsChosen:
