@@ -1,8 +1,18 @@
 #!/usr/bin/env python
 import cgi
 
+def writeBack(toWrite): #dictionary that needs to be copied to file
+	output = open("friends.txt","w")
+	for user in toWrite:
+		output.write(user)
+		for friend in toWrite[user]:
+			output.write(" "+friend)
+		output.write('\n')
+	output.close()
+
 def addFriends():
 	currentUser = "imalonelysoul12"
+	changesMade = 0
 	input = open("friends.txt","r")
         read = input.readlines()
         dict = {}#to store users and their friends
@@ -14,7 +24,7 @@ def addFriends():
                 user = parse[0]
                 parse.remove(parse[0])
                 dict[user] = parse
-
+	input.close()
 	form = cgi.FieldStorage() #put recieved data into dictionary
 	friendsChosen = []#stores friends chosen in a list
 	for tok in form:
@@ -22,14 +32,18 @@ def addFriends():
 		friendsChosen.append(tok)
 	print "START",dict,"<br />"
 	if currentUser in dict: #if user already has friends in database
-		for user in friendsChosen:
-			if user not in dict[currentUser]: #if friend is unique
-				dict[currentUser].append(user)
-				dict[user].append(currentUser) #friendship goes both ways
+		for friend in friendsChosen:
+			if friend not in dict[currentUser]: #if friend is unique
+				dict[currentUser].append(friend)
+				dict[friend].append(currentUser) #friendship goes both ways
+				changesMade = 1
 	else: #user does not have any friends yet
 		dict[currentUser] = friendsChosen #add all chosen users to be friends
 		for friend in friendsChosen: #user is a friend to the ones he/she chose
 			dict[friend].append(currentUser)
+		changesMade = 1
 	print "FINISH",dict
 	print "</body></html>"
+	if changesMade == 1: #to now waste rewriting the same thing
+		writeBack(dict)#write to file updated friends
 addFriends()	
