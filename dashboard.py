@@ -9,6 +9,7 @@ def main():
 	print "Content-type: text/html\n\n"
 	print "<html><head>"
 	print "<title>Dashboard</title>"
+	print "<link rel=\"stylesheet\" href=\"dashboard.css\" type=\"text/css\">"
 	print "</head><body>"
 	
 	# Parse query from Robert's Welcome Landing CGI or login.c ???
@@ -20,8 +21,10 @@ def main():
 	else: 
 		print "<h1>Error! please enter valid UserName!</h1>"
 		print "</body></html>"
-	
-	print "<h1>",currentUser,"'s Dashboard</h1>"
+
+	print "<div id=\"square\">"
+        print "<center><h1>", currentUser,"'s Dashboard</h1></center>"
+	print "</div>"	
 	
 	# User Status Updates:
 
@@ -54,7 +57,7 @@ def main():
 	
 	print "<fieldset>"
 	
-	print "<legend>Menu</legend>"
+	print "<legend><b>Menu</b></legend>"
 	
 	print "<form action=\"makefriends.py\" method=\"post\">"
 	print "<input type=\"hidden\" name=\"currentUser\" value=\"",currentUser,"\"> <br />"
@@ -85,7 +88,8 @@ def main():
 	
 	with open("friends.txt", "r") as searchFile:
 		for line in searchFile:
-			if currentUser in line:
+			name = line.split(" ")
+			if currentUser == name[0]:
 				allFriends = line #.split(None,1)[1]
 				break
 	if allFriends == "None":
@@ -94,7 +98,7 @@ def main():
 		print "<h3>Your Froup:", allFriends, "</h3><br>"
 
 	print "<form><fieldset>"
-	print "<legend>Recent Statuses:</legend>"
+	print "<legend><b>Recent Statuses:</b></legend>"
 		
 	updates = []
 	if allFriends !="None":
