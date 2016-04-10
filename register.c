@@ -4,6 +4,7 @@
 #define CONTENT_LENGTH getenv("CONTENT_LENGTH")
 FILE *file;
 int unique;
+char userName[20] = "";
 int checkUnique(char *name){//check if username is unique
    int userInterval = 0;
    char line[300];
@@ -51,8 +52,8 @@ int profile(char *tok){
       //printf("%s unique? %d<br />",attribute, checkUnique(attribute));
       if(checkUnique(attribute)){ 
            unique = 1;
-           fputs(attribute, file);
-           fputs("\n", file);
+           strcat(userName,attribute);
+	   strcat(userName,"\n");
         }
       else unique = 0;
       return 1;
@@ -65,6 +66,7 @@ int profile(char *tok){
          }
          attribute[j] = '\0';
          if(attribute[0] == '\0') return 0;//no password
+	 fputs(userName, file);
          fputs(attribute, file);
          fputs("\n", file);
          return 1;
