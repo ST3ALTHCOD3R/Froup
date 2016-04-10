@@ -96,9 +96,9 @@ int main(){
                }//username does not exist
             }
             printf("Password is correct");
-            printf("<form action=\"makefriends.py\" method=\"post\">");
-            printf("<input type=\"submit\" value=\"Make Friends\">");
-            printf("<input type=\"hidden\" name=\"currentUser\" value=\"%s\">", user);//pas on current user
+            printf("<form action=\"dashboard.py\" method=\"post\">");
+            printf("<input type=\"submit\" value=\"Dashboard\">");
+            printf("<input type=\"hidden\" name=\"currentUser\" value=\"%s\">", user);//pass on current user
             printf("</form>");
             return 0;//password is right to the username
          }

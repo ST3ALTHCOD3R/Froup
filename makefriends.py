@@ -3,8 +3,9 @@ import cgi
 
 def readFile():
 	form = cgi.FieldStorage()
+	currentUser = "NONE"
 	if form.has_key('currentUser'):
-		currentUser = form["currentUser"].value
+		currentUser = form["currentUser"].value.replace(" ","")
 	print "Content-Type: text/html\n\n"
 	print "<html><head><title>Make Friends</title></head>"
 	print "<body>"
@@ -37,7 +38,8 @@ def readFile():
 		print "Unexpected error"
 	input.close()
 	print "Or go back to the dashboard<br />"
-	print "<form action=\"login.html\">"
+	print "<form action=\"dashboard.py\" method=\"post\">"
+	print "<input type=\"hidden\" name=\"currentUser\" value=\"",currentUser,"\">"
 	print "<input type=\"submit\" value=\"Dashboard\">"
 	print "</form>"
 	print "</body>"

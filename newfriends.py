@@ -26,6 +26,7 @@ def addFriends():
 	input.close()
 	form = cgi.FieldStorage() #put recieved data into dictionary
 	friendsChosen = []#stores friends chosen in a list
+	currentUser="None"
 	if form.has_key('currentUser'):
                 currentUser = form["currentUser"].value.replace(" ","")
 	for tok in form:
@@ -48,7 +49,8 @@ def addFriends():
 	if changesMade == 1: #to now waste rewriting the same thing
 		writeBack(dict)#write to file updated friends
 	print "Success! Changes(if any) have been made to your account!<br />"
-	print "<form action=\"login.html\">"
+	print "<form action=\"dashboard.py\">"
+	print "<input type=\"hidden\" name=\"currentUser\" value=\"",currentUser,"\">"
 	print "Go back to dashboard<input type=\"submit\" value=\"Dashboard\">"
 	print "</form>"
 	print "</body></html>"
