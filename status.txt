@@ -36,3 +36,6 @@ Mickey hello
 Mickey why do i have no friends
 Robert just checking
 Mark i'm stuck on mars!
+Snowman Hello World!
+Mark Just making sure that this program works properly
+New Hi

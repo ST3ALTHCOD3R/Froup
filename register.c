@@ -11,12 +11,12 @@ int checkUnique(char *name){//check if username is unique
    fgets(line, 299, file);
    while(!feof(file)){
       //printf("line (%s)<br />",line);
-      int i =0;
-      while(line[i] != '\n'){
-         i++;
-      }
-      line[i] = '\0';
       if(userInterval%4 == 0){//so it only compares when it needs to
+         int i =0;
+         while(line[i] != '\n'){
+            i++;
+         }
+         line[i] = '\0';
          //printf("line %d | ",userInterval);
          //printf("comparison of Username (%s): %d with (%s)<br />",name, strcmp(name, line), line);
          if(strcmp(name, line) == 0){//a same username is found
