@@ -60,12 +60,12 @@ def main():
 	print "<legend><b>Menu</b></legend>"
 	
 	print "<form action=\"http://cs.mcgill.ca/~rfrati2/makefriends.py\" method=\"post\">"
-	print "<input type=\"hidden\" name=\"currentUser\" value=\"",currentUser,"\"> <br />"
+	print "<input type=\"hidden\" name=\"currentUser\" value=\"",currentUser,"\">"
 	print "<input type=\"submit\" value=\"Make Friends!\">"
 	print "</form><br />"
 	
 	print "<form action=\"seefriends.cgi\" method=\"post\">"
-	print "<input type=\"hidden\" name=\"user\" value=\"",currentUser,"\"> <br />"
+	print "<input type=\"hidden\" name=\"user\" value=\"",currentUser,"\">"
 	print "<input type=\"submit\" value=\"See Friends!\">"
 	print "</form><br />"
 	
@@ -86,7 +86,7 @@ def main():
 	
 	# Extracts existing friends list from friends.txt:
 	
-	with open("../../../2014/rfrati2/public_html/friends.txt", "r") as searchFile:
+	with open("/home/2014/rfrati2/public_html/friends.txt", "r") as searchFile:
 		for line in searchFile:
 			name = line.split(" ")
 			if currentUser == name[0]:
