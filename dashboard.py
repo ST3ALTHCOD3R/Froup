@@ -12,7 +12,7 @@ def main():
 	print "<link rel=\"stylesheet\" href=\"dashboard.css\" type=\"text/css\">"
 	print "</head><body>"
 	
-	# Parse query from Robert's Welcome Landing CGI or login.c ???
+	# Parse query from Robert's Welcome Landing CGI or login.c
 	currentUser = "None"
 	form = cgi.FieldStorage() 
 	
@@ -64,7 +64,7 @@ def main():
 	print "<input type=\"submit\" value=\"Make Friends!\">"
 	print "</form><br />"
 	
-	print "<form action=\"seeFriends.py\" method=\"post\">"
+	print "<form action=\"seefriends.cgi\" method=\"post\">"
 	print "<input type=\"hidden\" name=\"user\" value=\"",currentUser,"\"> <br />"
 	print "<input type=\"submit\" value=\"See Friends!\">"
 	print "</form><br />"
