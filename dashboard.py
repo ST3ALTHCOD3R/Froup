@@ -13,7 +13,7 @@ def main():
 	print "</head><body>"
 	
 	# Parse query from Robert's Welcome Landing CGI or login.c ???
-	
+	currentUser = "None"
 	form = cgi.FieldStorage() 
 	
 	if form.has_key('currentUser') and form['currentUser'].value != "":
@@ -59,7 +59,7 @@ def main():
 	
 	print "<legend><b>Menu</b></legend>"
 	
-	print "<form action=\"makefriends.py\" method=\"post\">"
+	print "<form action=\"http://cs.mcgill.ca/~rfrati2/makefriends.py\" method=\"post\">"
 	print "<input type=\"hidden\" name=\"currentUser\" value=\"",currentUser,"\"> <br />"
 	print "<input type=\"submit\" value=\"Make Friends!\">"
 	print "</form><br />"
@@ -70,7 +70,7 @@ def main():
 	print "</form><br />"
 	
 	# Logout button
-	print "<form action=\"index.html\">"
+	print "<form action=\"http://cs.mcgill.ca/~rfrati2/index.html\">"
 	print "<input type=\"submit\" value=\"Logout\">"
 	print "</form>"
 	
@@ -86,7 +86,7 @@ def main():
 	
 	# Extracts existing friends list from friends.txt:
 	
-	with open("friends.txt", "r") as searchFile:
+	with open("../../../2014/rfrati2/public_html/friends.txt", "r") as searchFile:
 		for line in searchFile:
 			name = line.split(" ")
 			if currentUser == name[0]:
