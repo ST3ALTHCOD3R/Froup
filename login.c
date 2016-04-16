@@ -5,7 +5,7 @@
 FILE *file;
 char line[300];//so it remembers the username when coming bak to check if password is correct
 char user[20];
-int checkCorrect(char *input){
+int checkCorrect(char *input){//checks if the username exists and the corresponding password is correct
    char attribute[strlen(input)];
    int i, userInterval = 0;
    if(input[0] == '\n')printf("it is null");
@@ -42,7 +42,7 @@ int checkCorrect(char *input){
       }   
       return 0;
    }
-   else if(strcmp(attribute, "pWord") == 0){
+   else if(strcmp(attribute, "pWord") == 0){//checks password
       for(; input[i] != '\0'; i++){
          attribute[j] = input[i];
          j++;
@@ -70,7 +70,7 @@ int main(){
    printf("Content-Type:text/html\n\n");
    printf("<html>");
    printf("<body>");
-   if(CONTENT_LENGTH != NULL){
+   if(CONTENT_LENGTH != NULL){//parses incoming POST form
       n = atoi(CONTENT_LENGTH);
       char manString[n];
       if((inputString = malloc(sizeof(char) * (n+1))) != NULL){
@@ -96,7 +96,8 @@ int main(){
                }//username does not exist
             }
             printf("Login Succesful!");
-            printf("<form action=\"dashboard.py\" method=\"post\" id=\"login\">");
+            printf("<form action=\"http://cs.mcgill.ca/~mlabra2/dashboard.py\" method=\"post\" id=\"login\">");
+            //printf("<form action=\"dashboard.py\" method=\"post\" id=\"login\">");
             printf("<input type=\"hidden\" name=\"currentUser\" value=\"%s\">", user);//pass on current user
 	    printf("Go to <input type=\"submit\" value=\"Dashboard\">");
             printf("</form>");

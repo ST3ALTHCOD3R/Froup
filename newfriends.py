@@ -17,6 +17,7 @@ def addFriends():
         dict = {}#to store users and their friends
 	print "Content-type:text/html\n\n"
         print "<html><body>"
+	#puts file of friends in a dictionary
         for line in read:
 		line = line.replace("\n", "")
                 parse = line.split(" ")
@@ -27,13 +28,13 @@ def addFriends():
 	form = cgi.FieldStorage() #put recieved data into dictionary
 	friendsChosen = []#stores friends chosen in a list
 	currentUser="None"
-	if form.has_key('currentUser'):
+	if form.has_key('currentUser'):#get current user
                 currentUser = form["currentUser"].value.replace(" ","")
-	for tok in form:
+	for tok in form:#gets all the friends chosen from the form
 		if tok != "currentUser":
 			tok = tok.replace(" ","")
 			friendsChosen.append(tok)
-	#print "START",dict,"<br />"
+
 	if currentUser in dict: #if user already has friends in database
 		for friend in friendsChosen:
 			if friend not in dict[currentUser]: #if friend is unique
@@ -45,11 +46,10 @@ def addFriends():
 		#for friend in friendsChosen: #user is a friend to the ones he/she chose
 			#dict[friend].append(currentUser)
 		changesMade = 1
-	#print "FINISH",dict
-	if changesMade == 1: #to now waste rewriting the same thing
+	if changesMade == 1: #to not waste rewriting the same thing
 		writeBack(dict)#write to file updated friends
-	print "Success! Changes(if any) have been made to your account!<br />"
-	print "<form action=\"dashboard.py\">"
+	print "Success! Changes(if any) have been made to your account!<br /><br />"
+	print "<form action=\"http://cs.mcgill.ca/~mlabra2/dashboard.py\" method=\"post\">"
 	print "<input type=\"hidden\" name=\"currentUser\" value=\"",currentUser,"\">"
 	print "Go back to dashboard<input type=\"submit\" value=\"Dashboard\">"
 	print "</form>"

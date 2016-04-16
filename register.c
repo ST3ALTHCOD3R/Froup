@@ -2,9 +2,10 @@
 #include<stdlib.h>
 #include<string.h>
 #define CONTENT_LENGTH getenv("CONTENT_LENGTH")
+
 FILE *file;
 int unique;
-char userName[20] = "";
+char userName[20];
 int checkUnique(char *name){//check if username is unique
    int userInterval = 0;
    char line[300];
@@ -29,7 +30,7 @@ int checkUnique(char *name){//check if username is unique
    return 1;//it is unique
 }
 
-int profile(char *tok){
+int profile(char *tok){ //sets up the account for the user
    char attribute[strlen(tok)];
    int i;
    if(tok[0] == '\n')printf("it is null");
@@ -49,7 +50,6 @@ int profile(char *tok){
       }
       attribute[j] = '\0';
       if(attribute[0] == '\0') return 0;//no username
-      //printf("%s unique? %d<br />",attribute, checkUnique(attribute));
       if(checkUnique(attribute)){ 
            unique = 1;
            strcat(userName,attribute);
@@ -104,7 +104,7 @@ int main(void){
    printf("Content-Type:text/html\n\n");//to print to browser
    printf("<html>");
    printf("<body>");
-   if(CONTENT_LENGTH != NULL){
+   if(CONTENT_LENGTH != NULL){//following block parses from the POST string
       n = atoi(CONTENT_LENGTH);
       char manString[n];
       if((inputString = malloc(sizeof(char) * (n+1))) != NULL){
@@ -113,7 +113,7 @@ int main(void){
             //printf("str length: %d and string is: %s.<br />",n, manString);
             token = strtok(manString, "&");
             while(token != NULL){
-               if(profile(token)){
+               if(profile(token)){//makes sure there is both a username and password
                   token = strtok(NULL, "&");
                }
                else{
@@ -135,7 +135,7 @@ int main(void){
          }
       }
    }
-   if(unique){
+   if(unique){//if the username is unique
       printf("<b>Congratulations! Your account has been been made. Now login and connect with your friends!</b><br /><br />");
       printf("<form action=\"login.html\">");
       printf("<input type=\"submit\" value=\"Login\">");
