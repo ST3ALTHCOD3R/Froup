@@ -7,8 +7,13 @@ def readFile():
 	if form.has_key('currentUser'):
 		currentUser = form["currentUser"].value.replace(" ","")
 	print "Content-Type: text/html\n\n"
-	print "<html><head><title>Make Friends</title></head>"
+	print "<html><head><title>Make Friends</title>"
+	print "<link rel=\"stylesheet\" href=\"dashboard.css\" type=\"text/css\"></head>"
 	print "<body>"
+	print "<div id='square'>"
+	print " <h1><center>Make Friends</center></h1>"
+	print "</div>"
+	print "<fieldset><legend><b>Grow your Froup</b></legend>"
 	try:
 		input = open("users.txt","r")
 		read = input.readlines()
@@ -37,10 +42,11 @@ def readFile():
 	except:
 		print "Unexpected error"
 	input.close()
-	print "Or go back to the dashboard<br />"
-	print "<form action=\"dashboard.py\" method=\"post\">"
+	print "</fieldset>"
+	print "<br />"
+	print "<form action=\"http://cs.mcgill.ca/~mlabra2/dashboard.py\" method=\"post\">"
 	print "<input type=\"hidden\" name=\"currentUser\" value=\"",currentUser,"\">"
-	print "<input type=\"submit\" value=\"Dashboard\">"
+	print "<input type=\"submit\" value=\"Back to Dashboard!\">"
 	print "</form>"
 	print "</body>"
 	print "</html>"
